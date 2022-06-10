@@ -1,0 +1,38 @@
+###get all
+GET http://localhost:3001/api/persons
+
+### get 1
+GET http://localhost:3001/api/persons/1
+
+### delete 1
+DELETE http://localhost:3001/api/persons/1
+
+### add already existing person should fail 403
+
+POST http://localhost:3001/api/persons
+content-type: application/json
+
+{
+    "name": "Mary Poppendieck",
+    "number": "123"
+}
+
+
+### add person without name
+
+POST http://localhost:3001/api/persons
+content-type: application/json
+
+{
+    "number": "123"
+}
+
+### add person without name
+
+POST http://localhost:3001/api/persons
+content-type: application/json
+
+{
+    "name": "James Smith"
+}
+

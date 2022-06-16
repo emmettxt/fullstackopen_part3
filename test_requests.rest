@@ -1,20 +1,23 @@
 ###get all
-GET http://localhost:3001/api/persons
+GET http://localhost:3002/api/persons
 
 ### get 1
-GET http://localhost:3001/api/persons/1
+GET http://localhost:3002/api/persons/62a9d8c1f5d28d25d6a4506b
+
+### bad get
+GET http://localhost:3002/api/persons/badget
 
 ### delete 1
-DELETE http://localhost:3001/api/persons/1
+DELETE http://localhost:3002/api/persons/1
 
 ### add already existing person should fail 403
 
-POST http://localhost:3001/api/persons
+POST http://localhost:3002/api/persons
 content-type: application/json
 
 {
-    "name": "Mary Poppendieck",
-    "number": "123"
+    "name": "Spine",
+    "number": "21-121354655464"
 }
 
 
@@ -29,10 +32,17 @@ content-type: application/json
 
 ### add person without name
 
-POST http://localhost:3001/api/persons
+POST http://localhost:3002/api/persons
 content-type: application/json
 
 {
     "name": "James Smith"
 }
+###
+PUT http://localhost:3002/api/persons/62aa381c40c0c2def2bb5218
+content-type: application/json
 
+{
+    "name": "An",
+    "number":""
+}

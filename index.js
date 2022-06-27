@@ -6,7 +6,6 @@ const Person = require('./modules/person')
 app.use(express.json())
 app.use(express.static('build'))
 const morgan = require('morgan')
-const { updateMany } = require('./modules/person')
 app.use(
     morgan((tokens, req, res) => {
         return [
@@ -44,7 +43,7 @@ app.get('/api/persons/:id', (req, res, nxt) => {
 app.delete('/api/persons/:id', (req, res, nxt) => {
     Person
         .findByIdAndRemove(req.params.id)
-        .then(result => res.status(204).end())
+        .then(() => res.status(204).end())
         .catch(err => nxt(err))
 })
 app.post('/api/persons', (req, res, next) => {
@@ -76,21 +75,21 @@ app.put('/api/persons/:id', (req, res, nxt) => {
         .catch(err => nxt(err))
 })
 const errorHandler = (err, req, res, nxt) => {
-    console.error("Error Name", err.name)
-    console.error("Error Message: ", err.message)
+    console.error('Error Name', err.name)
+    console.error('Error Message: ', err.message)
     switch (err.name) {
-        case 'CastError':
-            res.status(400).send({ error: 'malformatted id' })
-            break;
-        case 'MongoServerError':
-            res.status(500).send({ error: err.message })
-            break;
-        case 'ValidationError':
-            res.status(400).send({ error: err.message })
-            break;
-            
-        default:
-            nxt(err)
+    case 'CastError':
+        res.status(400).send({ error: 'malformatted id' })
+        break
+    case 'MongoServerError':
+        res.status(500).send({ error: err.message })
+        break
+    case 'ValidationError':
+        res.status(400).send({ error: err.message })
+        break
+
+    default:
+        nxt(err)
     }
 
 }

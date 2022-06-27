@@ -15,20 +15,20 @@ const Person = mongoose.model('Person', personSchema)
 
 mongoose
     .connect(url)
-    .then(_ => {
+    .then(() => {
         if (process.argv.length > 3) {
             const person = new Person({
                 name: process.argv[3],
                 number: process.argv[4]
             })
-            return person.save().then(()=>{
+            return person.save().then(() => {
                 console.log(`Added ${person.name} number ${person.number} to phone book`)
                 return mongoose.connection.close()
             })
         }
         else{
-            Person.find({}).then(result =>{
-                console.log("Phonebook:")
+            Person.find({}).then(result => {
+                console.log('Phonebook:')
                 result.forEach(person => { console.log(`${person.name} ${person.number}`) })
                 mongoose.connection.close()
             })
